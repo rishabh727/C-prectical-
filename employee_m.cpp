@@ -1,27 +1,4 @@
-// #include<iostream>
-// #include<windows.h>
 
-// using namespace std;
-
-// int main(){
-//     cout<<"\n\n\t\tEmployee Management System"<<endl;
-//     cout<<"\n\t\tSign Up "<<endl;
-//     string username,password;
-//     cout<<"\n\t\tEnter username: ";
-//     cin>>username;
-//     cout<<"\n\t\tEnter the password: ";
-//     cin>>password;
-//     cout<<"\n\t\tYour id is creating please wait";
-//     for (int i=1;1<8;i++){
-//         cout<<".";
-//         Sleep(1000);
-//         cout<<"\n\tYour id is created successfully";
-//         break;
-        
-//     }
-
-//     return 0;
-// }
 #include<iostream>
 
 #include<conio.h>

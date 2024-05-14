@@ -1,33 +1,40 @@
-#include <iostream>
+// Write a program to calculate GCD of two numbers 
 
-// GCD calculation without recursion
-int gcd(int a, int b) {
-    while (b != 0) {
-        int temp = b;
-        b = a % b;
-        a = temp;
-    }
+// (i) with recursion 
+
+#include <iostream>
+using namespace std;
+
+int gcdWithRec(int a, int b) {
+  if (b == 0) {
     return a;
+  }
+  return gcdWithRec(b, a % b);
 }
 
-// GCD calculation with recursion
-int gcdRecursive(int a, int b) {
-    if (b == 0) {
-        return a;
+// (ii) without recursion.
+
+int gcdWithoutRec(int a, int b) {
+  while (a != b) {
+    if (a > b) {
+      a -= b;
+    } else {
+      b -= a;
     }
-    return gcdRecursive(b, a % b);
+  }
+  return a;
 }
 
 int main() {
-    int num1 = 24, num2 = 36;
+  int a, b;
+  cout << "Enter two numbers: ";
+  cin >> a >> b;
 
-    // Using GCD calculation without recursion
-    int result = gcd(num1, num2);
-    std::cout << "GCD of " << num1 << " and " << num2 << " is " << result << std::endl;
+  // With recursion
+  // cout << "GCD: " << gcdWithRec(a, b) << endl;
 
-    // Using GCD calculation with recursion
-    result = gcdRecursive(num1, num2);
-    std::cout << "GCD of " << num1 << " and " << num2 << " is " << result << std::endl;
+  // Without recursion
+  cout << "GCD: " << gcdWithoutRec(a, b) << endl;
 
-    return 0;
+  return 0;
 }

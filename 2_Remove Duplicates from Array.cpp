@@ -1,27 +1,34 @@
-//Remove Duplicates from Array
-#include <iostream>
-#include <unordered_set>
-#include <vector>
+// WAP to remove duplicates value from array
 
-std::vector<int> removeDuplicates(std::vector<int>& nums) {
-    std::unordered_set<int> seen;
-    std::vector<int> result;
-    for (int num : nums) {
-        if (seen.find(num) == seen.end()) {
-            seen.insert(num);
-            result.push_back(num);
+#include<iostream>
+using namespace std;
+
+bool exist(int arr[], int elem,int last){
+    for (int i=0; i<last;i++){
+        if (arr[i]==elem)
+        {
+            return true;
         }
     }
-    return result;
+    return false;
 }
+int main(){
+    int arr[10] = {1,1,4,1,6,5,4,7,4,2};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    int newArr[n];
+    int index = 0;
 
-int main() {
-    std::vector<int> nums = {1, 2, 2, 3, 4, 4, 5};
-    std::vector<int> result = removeDuplicates(nums);
-    std::cout << "Array after removing duplicates: ";
-    for (int num : result) {
-        std::cout << num << " ";
+    for (int i = n-1; i > -1; i--)
+    {
+        if(!exist(arr,arr[i],i)){
+            newArr[index] = arr[i];
+            index++;
+        }
     }
-    std::cout << std::endl;
+    for (int i = index-1; i > -1; i--)
+    {
+        cout<<newArr[i]<<" ";
+    }
+    
     return 0;
 }

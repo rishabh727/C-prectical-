@@ -1,33 +1,40 @@
-#include <iostream>
-#include <cstdlib> // For atoi function
-
-double computeSum(int n) {
-    double total = 0.0;
-    for (int i = 1; i <= n; ++i) {
-        if (i % 2 == 0)
-            total -= 1.0 / (i * i);
-        else
-            total += 1.0 / (i * i);
-    }
-    return total;
-}
-
-int main(int argc, char* argv[]) {
+#include<iostream>
+using namespace std;
+int main(){
     int n;
-    if (argc > 1) {
-        n = atoi(argv[1]);
-    } else {
-        std::cout << "Enter the number of terms (n): ";
-        std::cin >> n;
-    }
+    float sum = 0.0;
+    
+    cout<<"Enter nth term of the series";
+    cin>>n;
 
-    if (n <= 0) {
-        std::cout << "Please enter a positive integer for n." << std::endl;
-        return 1;
+    for (float i = 1; i < n+1; i++){
+        // cout<<(1/(i*i))<<" ";
+        if (int(i)%2!=0 )
+        {
+            cout<<"1/"<<i<<"^2";
+            if (i!=n)
+            {
+                cout<<" - ";
+            }
+            sum+=(1/(i*i));
+            
+        }
+        
+        else if (int(i)%2==0 )
+        {
+            cout<<"1/"<<i<<"^2";
+            if (i!=n)
+            {
+                cout<<" + ";
+            }
+            
+            sum-=(1/(i*i));
+            
+        }
+        
     }
-
-    double seriesSum = computeSum(n);
-    std::cout << "The sum of the first " << n << " terms of the series is: " << seriesSum << std::endl;
+    
+    cout<<endl<<"Sum of "<<n<<" Terms of series = "<<sum;
 
     return 0;
 }

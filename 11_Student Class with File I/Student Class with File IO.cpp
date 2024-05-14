@@ -1,63 +1,55 @@
+// Create a class Student containing fields for Roll No., Name, Class, Year and Total Marks. Write a program to store 5 objects of Student class in a file. Retrieve these records from the file and display them.
+
 #include <iostream>
 #include <fstream>
-#include <string>
+using namespace std;
 
 class Student {
-private:
     int rollNo;
-    std::string name;
-    std::string className;
+    string name;
+    string className;
     int year;
     int totalMarks;
-
 public:
-    Student(int r, const std::string& n, const std::string& c, int y, int t) : rollNo(r), name(n), className(c), year(y), totalMarks(t) {}
-
-    void saveToFile(std::ofstream& file) const {
-        file << rollNo << " " << name << " " << className << " " << year << " " << totalMarks << std::endl;
+    void input() {
+        cout << "Enter roll no: ";
+        cin >> rollNo;
+        cout << "Enter name: ";
+        cin >> name;
+        cout << "Enter class: ";
+        cin >> className;
+        cout << "Enter year: ";
+        cin >> year;
+        cout << "Enter total marks: ";
+        cin >> totalMarks;
     }
 
-    static Student readFromFile(std::ifstream& file) {
-        int rollNo;
-        std::string name, className;
-        int year, totalMarks;
-        file >> rollNo >> name >> className >> year >> totalMarks;
-        return Student(rollNo, name, className, year, totalMarks);
-    }
-
-    void display() const {
-        std::cout << "Roll No.: " << rollNo << std::endl;
-        std::cout << "Name: " << name << std::endl;
-        std::cout << "Class: " << className << std::endl;
-        std::cout << "Year: " << year << std::endl;
-        std::cout << "Total Marks: " << totalMarks << std::endl;
+    void display() {
+        cout << "Roll No: " << rollNo << endl;
+        cout << "Name: " << name << endl;
+        cout << "Class: " << className << endl;
+        cout << "Year: " << year << endl;
+        cout << "Total Marks: " << totalMarks << endl;
     }
 };
 
 int main() {
-    // Write student data to file
-    std::ofstream outFile("students.txt");
-    if (outFile.is_open()) {
-        Student student1(1, "John Doe", "Class X", 2023, 450);
-        Student student2(2, "Alice Smith", "Class XI", 2022, 480);
-        student1.saveToFile(outFile);
-        student2.saveToFile(outFile);
-        outFile.close();
-    } else {
-        std::cerr << "Unable to open file for writing." << std::endl;
+    Student s[5];
+    ofstream file;
+    file.open("students.txt", ios::out); //ios::out is used to open the file in write mode
+    for (int i = 0; i < 5; i++) {
+        s[i].input();
+        file.write((char *)&s[i], sizeof(s[i])); // write(record, size of record)
     }
+    file.close();
 
-    // Read student data from file
-    std::ifstream inFile("students.txt");
-    if (inFile.is_open()) {
-        Student student1 = Student::readFromFile(inFile);
-        Student student2 = Student::readFromFile(inFile);
-        student1.display();
-        student2.display();
-        inFile.close();
-    } else {
-        std::cerr << "Unable to open file for reading." << std::endl;
+    ifstream file2;
+    file2.open("students.txt", ios::in); //ios::in is used to open the file in read mode
+    for (int i = 0; i < 5; i++) {
+        file2.read((char *)&s[i], sizeof(s[i])); // read(record, size of record)
+        s[i].display();
+        cout<<endl;
     }
-
+    file2.close();
     return 0;
 }
